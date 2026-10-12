@@ -1,5 +1,7 @@
 package io.github.Daniel3649;
 
+import java.util.Objects;
+
 public class TrainingSession {
     //группа
     private final Group group;
@@ -31,5 +33,26 @@ public class TrainingSession {
 
     public TimeOfDay getTimeOfDay() {
         return timeOfDay;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TrainingSession other = (TrainingSession) o;
+        return group.equals(other.group) &&
+                coach.equals(other.coach) &&
+                dayOfWeek.equals(other.dayOfWeek) &&
+                timeOfDay.equals(other.timeOfDay);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(group, coach, dayOfWeek, timeOfDay);
     }
 }

@@ -1,5 +1,7 @@
 package io.github.Daniel3649;
 
+import java.util.Objects;
+
 public class Group {
     //название группы
     private final String title;
@@ -24,5 +26,25 @@ public class Group {
 
     public int getDuration() {
         return duration;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Group other = (Group) o;
+        return title.equals(other.title) &&
+                age.equals(other.age) &&
+                duration == other.duration;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, age, duration);
     }
 }

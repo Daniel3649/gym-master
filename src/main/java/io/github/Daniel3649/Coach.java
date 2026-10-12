@@ -26,4 +26,19 @@ public class Coach {
     public String getMiddleName() {
         return middleName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Coach other = (Coach) o;
+        return surname.equals(other.surname) &&
+                name.equals(other.name) &&
+                middleName.equals(other.middleName);
+    }
 }

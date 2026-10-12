@@ -1,5 +1,7 @@
 package io.github.Daniel3649;
 
+import java.util.Objects;
+
 public class TimeOfDay {
     //часы (от 0 до 23)
     private final int hours;
@@ -17,5 +19,23 @@ public class TimeOfDay {
 
     public int getMinutes() {
         return minutes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TimeOfDay other = (TimeOfDay) o;
+        return hours == other.hours && minutes == other.minutes;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hours, minutes);
     }
 }
