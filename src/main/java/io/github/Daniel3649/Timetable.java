@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
 
 public class Timetable {
     private final Map<DayOfWeek, Map<TimeOfDay, List<TrainingSession>>> timetable;
@@ -37,5 +39,30 @@ public class Timetable {
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         return timetable.get(dayOfWeek).getOrDefault(timeOfDay, new ArrayList<>());
+    }
+
+    public Map<Coach, Long> getCountByCoaches() {
+        return timetable.values().stream()
+                .flatMap(trainingsByDayOfWeek ->
+                        trainingsByDayOfWeek
+                                .values()
+                                .stream()
+                )
+                .flatMap(List::stream)
+                .collect(Collectors.groupingBy(
+                        TrainingSession::getCoach,
+                        Collectors.counting()
+                        )
+                ).entrySet().stream()
+                .sorted(Comparator
+                        .<Map.Entry<Coach, Long>>comparingLong(Map.Entry::getValue)
+                        .reversed()
+                )
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, _) -> oldValue,
+                        LinkedHashMap::new
+                ));
     }
 }
