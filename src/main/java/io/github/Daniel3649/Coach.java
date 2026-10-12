@@ -1,5 +1,7 @@
 package io.github.Daniel3649;
 
+import java.util.Objects;
+
 public class Coach {
 
     //фамилия
@@ -40,5 +42,10 @@ public class Coach {
         return surname.equals(other.surname) &&
                 name.equals(other.name) &&
                 middleName.equals(other.middleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name, middleName);
     }
 }
