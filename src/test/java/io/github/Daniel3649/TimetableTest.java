@@ -101,8 +101,8 @@ public class TimetableTest {
                 timeOfDay
         );
         List<TrainingSession> trainingsByMondayAnd2PM = timetable.getTrainingSessionsForDayAndTime(
-                DayOfWeek.TUESDAY,
-                timeOfDay
+                DayOfWeek.MONDAY,
+                new TimeOfDay(14, 0)
         );
 
         assertThat(trainingsByMondayAnd1PM)
